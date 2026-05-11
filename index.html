@@ -37,6 +37,12 @@
       color: black;
       font-weight: bold;
     }
+    #result {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #00ffaa;
+      margin-top: 15px;
+    }
   </style>
 </head>
 <body>
@@ -48,7 +54,20 @@
     </div>
 
     <div class="row justify-content-center">
-      
+
+      <!-- Profit Calculator -->
+      <div class="col-md-8 mb-4">
+        <div class="card p-4">
+          <h3 class="text-warning text-center mb-3">📊 Profit Calculator</h3>
+          <div class="mb-3">
+            <label class="form-label">Your Hashrate (KH/s)</label>
+            <input type="number" id="hashrate" class="form-control bg-dark text-light" value="500" placeholder="Example: 500">
+          </div>
+          <button onclick="calculateProfit()" class="btn btn-mining w-100 mb-3">Calculate Daily Profit</button>
+          <div id="result" class="text-center"></div>
+        </div>
+      </div>
+
       <!-- Pool Recommendations -->
       <div class="col-md-8 mb-4">
         <div class="card p-4">
@@ -67,7 +86,7 @@
       <!-- How to Mine -->
       <div class="col-md-8 mb-4">
         <div class="card p-4">
-          <h3 class="text-info text-center mb-3">📱 How to Mine on Android Phone</h3>
+          <h3 class="text-info text-center mb-3">📱 How to Mine on Android</h3>
           <p class="text-center">Use <strong>Termux + cpuminer</strong> or Unmineable App.</p>
           <a href="#" class="btn btn-mining btn-lg w-100">View Full Tutorial</a>
         </div>
@@ -91,5 +110,18 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function calculateProfit() {
+      const hashrate = parseFloat(document.getElementById('hashrate').value) || 0;
+      const dailyDGB = (hashrate * 0.00085); 
+      
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = `
+        <strong>Estimated Daily:</strong><br>
+        ${dailyDGB.toFixed(4)} DGB<br>
+        <small style="color:#aaa;">* Rough estimation. Real result depends on difficulty & pool.</small>
+      `;
+    }
+  </script>
 </body>
 </html>
